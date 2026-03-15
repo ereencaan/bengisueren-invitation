@@ -1,0 +1,217 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Outfit', sans-serif;
+  background: linear-gradient(160deg, #f0ebe3 0%, #e8e2d9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.page {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  min-height: 80vh;
+}
+
+/* —— Zarf —— */
+.envelope-wrapper {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.envelope-wrapper.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #f5f0e8 0%, #e8e0d5 100%);
+  border-radius: 8px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 170px solid transparent;
+  border-right: 170px solid transparent;
+  border-top: 120px solid #e8e0d2;
+  filter: drop-shadow(0 -2px 4px rgba(0, 0, 0, 0.06));
+  transition: transform 0.7s ease;
+  transform-origin: 50% 100%;
+}
+
+.envelope-wrapper.open .envelope-flap {
+  transform: translateX(-50%) rotateX(-180deg);
+}
+
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.envelope-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: 0.02em;
+}
+
+.envelope-subtitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #5c5c5c;
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+}
+
+.envelope-hint {
+  font-size: 0.75rem;
+  color: #aaa;
+  font-weight: 300;
+  margin-top: 1rem;
+}
+
+/* —— Davetiye kartı —— */
+.invitation {
+  transition: opacity 0.6s ease 0.2s;
+}
+
+.invitation.hidden {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.invitation-card {
+  background: linear-gradient(160deg, #fdfbf7 0%, #f5f0e8 100%);
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+.invitation-heading {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a68b5b;
+  margin-bottom: 0.5rem;
+}
+
+.invitation-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+}
+
+.invitation-families {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.invitation-datetime {
+  margin-bottom: 1.5rem;
+}
+
+.invitation-date {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.invitation-time {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-top: 0.25rem;
+}
+
+.invitation-venue {
+  margin-bottom: 1.25rem;
+}
+
+.venue-name {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.venue-address {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 0.35rem;
+}
+
+.btn-map {
+  display: inline-block;
+  padding: 0.65rem 1.5rem;
+  background: #1a1a1a;
+  color: #f5f0e8;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-map:hover {
+  background: #333;
+  transform: translateY(-1px);
+}
+
+.invitation-hashtag {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #a68b5b;
+  letter-spacing: 0.05em;
+}

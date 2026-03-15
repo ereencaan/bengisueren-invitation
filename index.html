@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bengisu & Eren · Düğün Davetiyesi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page" id="page">
+    <!-- Kapalı zarf -->
+    <div class="envelope-wrapper" id="envelopeWrapper">
+      <div class="envelope">
+        <div class="envelope-body"></div>
+        <div class="envelope-flap"></div>
+        <button type="button" class="envelope-front" id="openBtn" aria-label="Davetiyeyi aç">
+          <span class="envelope-title">Bengisu – Eren</span>
+          <span class="envelope-subtitle">düğün davetiyesi</span>
+          <span class="envelope-hint">Davetiyeyi görüntülemek için dokununuz</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Açık davetiye -->
+    <div class="invitation hidden" id="invitation">
+      <div class="invitation-card">
+        <p class="invitation-heading">İşte gelin & damat</p>
+        <h1 class="invitation-names">Bengisu & Eren</h1>
+
+        <div class="invitation-families">
+          <p><strong>Gelin ailesi</strong><br />Faik & Aysel Tepealan</p>
+          <p><strong>Damat ailesi</strong><br />Adem & Hayriye Can</p>
+        </div>
+
+        <div class="invitation-datetime">
+          <p class="invitation-date">5 Eylül 2026 · Cumartesi</p>
+          <p class="invitation-time">20:30</p>
+        </div>
+
+        <div class="invitation-venue">
+          <p class="venue-name">Denizli Saray Bahçe Düğün Davet</p>
+          <p class="venue-address">Kayalar Mahallesi 6010 Sokak No:2<br />Merkezefendi / DENİZLİ</p>
+        </div>
+
+        <a href="https://www.google.com/maps?ll=37.828034,29.050481&z=16&t=m&hl=tr&gl=TR&mapclient=embed&cid=17318374357569869063" target="_blank" rel="noopener noreferrer" class="btn-map">Yol tarifi</a>
+
+        <p class="invitation-hashtag">#BengisuEren2026</p>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
