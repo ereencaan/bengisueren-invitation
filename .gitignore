@@ -1,0 +1,10 @@
+# IDE / editor
+.vs/
+.vscode/
+
+# Local dev helpers (preview server)
+.claude/
+
+# OS
+Thumbs.db
+.DS_Store
