@@ -225,13 +225,13 @@ body {
 
 .families {
   display: grid;
-  grid-template-columns: 1fr 84px 1fr;
+  grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr);
   gap: 18px;
   align-items: center;
   border-top: 1px solid rgba(163, 146, 108, .25);
   border-bottom: 1px solid rgba(163, 146, 108, .25);
   padding: 32px 0;
-  max-width: 640px;
+  max-width: 720px;
   margin: 0 auto;
 }
 .family h3 {
@@ -245,8 +245,8 @@ body {
   margin: 0;
   font-family: "Cormorant Garamond", serif;
   color: #5e6850;
-  font-size: clamp(28px, 4.6vw, 40px);
-  line-height: 1.05;
+  font-size: clamp(26px, 3.4vw, 36px);
+  line-height: 1.1;
   font-weight: 500;
 }
 .family-left { text-align: left; }
@@ -612,10 +612,18 @@ body {
 
   .intro-text { font-size: 22px; }
 
-  .families { grid-template-columns: 1fr 50px 1fr; gap: 8px; padding: 26px 0; }
-  .family h3 { font-size: 10px; letter-spacing: .18em; }
-  .family p { font-size: 24px; }
-  .divider span { height: 34px; }
+  .families {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 22px 0;
+    max-width: 340px;
+  }
+  .family { padding: 15px 0; }
+  .family-left, .family-right { text-align: center; }
+  .family h3 { font-size: 11px; letter-spacing: .2em; margin-bottom: 10px; }
+  .family p { font-size: 26px; }
+  .divider { grid-auto-flow: column; justify-content: center; gap: 14px; padding: 2px 0; }
+  .divider span { width: 46px; height: 1px; }
 
   .date-main { gap: 12px; }
   .d-num { font-size: clamp(50px, 16vw, 74px); }
