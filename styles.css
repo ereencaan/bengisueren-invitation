@@ -529,18 +529,16 @@ body {
 }
 .contacts {
   display: inline-flex;
-  align-items: center;
-  gap: 28px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
 }
 .contact {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 6px;
-  text-decoration: none;
-  padding: 6px 8px;
-  transition: transform .2s ease;
 }
-.contact:hover { transform: translateY(-2px); }
 .c-name {
   font-family: "Cormorant Garamond", serif;
   font-size: 28px;
@@ -549,11 +547,85 @@ body {
 }
 .c-num {
   font-size: 15px;
-  letter-spacing: .08em;
+  letter-spacing: .04em;
   color: var(--gold);
   font-weight: 500;
 }
-.contact-sep { color: var(--gold-soft); font-size: 22px; }
+.c-actions {
+  display: inline-flex;
+  gap: 9px;
+  margin-top: 10px;
+}
+.c-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.c-btn svg { width: 15px; height: 15px; }
+.c-btn:hover { transform: translateY(-2px); }
+.c-call {
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(47, 74, 45, .2);
+}
+.c-call:hover { background: var(--green-deep); box-shadow: 0 9px 20px rgba(47, 74, 45, .28); }
+.c-wa {
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(37, 211, 102, .26);
+}
+.c-wa:hover { background: #1ebe5b; box-shadow: 0 9px 20px rgba(37, 211, 102, .34); }
+.contact-sep { color: var(--gold-soft); font-size: 22px; align-self: center; }
+
+/* ============ ADD TO CALENDAR ============ */
+.calendar { margin-top: 40px; text-align: center; }
+.cal-text {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(18px, 3vw, 22px);
+}
+.cal-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.cal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: var(--paper);
+  border: 1px solid rgba(163, 146, 108, .5);
+  color: var(--green-deep);
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.cal-btn svg { width: 17px; height: 17px; }
+.cal-btn:hover {
+  transform: translateY(-2px);
+  background: #fff;
+  border-color: var(--green);
+  box-shadow: 0 8px 20px rgba(47, 74, 45, .12);
+}
 
 /* ============ FOOTER ============ */
 .foot {
@@ -642,7 +714,10 @@ body {
   .pin { margin: 0 auto; }
   .venue p { font-size: 15px; }
 
-  .contacts { gap: 16px; }
+  .contacts { flex-direction: column; align-items: center; gap: 18px; }
+  .contact-sep { display: none; }
   .c-name { font-size: 24px; }
-  .c-num { font-size: 13px; }
+  .c-num { font-size: 14px; }
+  .cal-buttons { flex-direction: column; align-items: center; }
+  .cal-btn { width: 100%; max-width: 240px; justify-content: center; }
 }

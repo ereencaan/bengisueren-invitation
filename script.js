@@ -57,4 +57,56 @@ document.addEventListener("DOMContentLoaded", function () {
     tick();
     const timer = setInterval(tick, 1000);
   }
+
+  /* ---------- Takvime ekle (.ics) ---------- */
+  function icsDate(d) {
+    const p = (n) => String(n).padStart(2, "0");
+    return (
+      d.getUTCFullYear() +
+      p(d.getUTCMonth() + 1) +
+      p(d.getUTCDate()) +
+      "T" +
+      p(d.getUTCHours()) +
+      p(d.getUTCMinutes()) +
+      p(d.getUTCSeconds()) +
+      "Z"
+    );
+  }
+
+  function downloadIcs() {
+    const start = new Date("2026-09-05T18:00:00+03:00");
+    const end = new Date("2026-09-05T23:00:00+03:00");
+    const ics = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Bengisu Eren Wedding//TR",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      "BEGIN:VEVENT",
+      "UID:bengisu-eren-2026-09-05@wedding",
+      "DTSTAMP:" + icsDate(new Date("2026-01-01T00:00:00Z")),
+      "DTSTART:" + icsDate(start),
+      "DTEND:" + icsDate(end),
+      "SUMMARY:Bengisu & Eren Düğünü",
+      "LOCATION:Saray Bahçe Düğün & Davet\\, Kayalar Mah. 6010 Sk. No:2 Merkezefendi/DENİZLİ",
+      "DESCRIPTION:Sizleri düğünümüze bekliyoruz. #BengisuErenWedding",
+      "GEO:37.828034;29.050481",
+      "END:VEVENT",
+      "END:VCALENDAR",
+    ].join("\r\n");
+    const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "BengisuEren-Dugun.ics";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 500);
+  }
+
+  const calApple = document.getElementById("calApple");
+  const calOutlook = document.getElementById("calOutlook");
+  if (calApple) calApple.addEventListener("click", downloadIcs);
+  if (calOutlook) calOutlook.addEventListener("click", downloadIcs);
 });
