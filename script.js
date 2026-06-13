@@ -109,4 +109,52 @@ document.addEventListener("DOMContentLoaded", function () {
   const calOutlook = document.getElementById("calOutlook");
   if (calApple) calApple.addEventListener("click", downloadIcs);
   if (calOutlook) calOutlook.addEventListener("click", downloadIcs);
+
+  /* ---------- Hashtag → Instagram ---------- */
+  const hashtagBtn = document.getElementById("hashtagBtn");
+  if (hashtagBtn) {
+    const TAG = "#BengisuErenWedding";
+    const WEB = "https://www.instagram.com/explore/tags/bengisuerenwedding/";
+
+    const showToast = (msg) => {
+      const t = document.createElement("div");
+      t.className = "toast";
+      t.setAttribute("role", "status");
+      t.textContent = msg;
+      document.body.appendChild(t);
+      requestAnimationFrame(() => t.classList.add("show"));
+      setTimeout(() => {
+        t.classList.remove("show");
+        setTimeout(() => t.remove(), 450);
+      }, 2600);
+    };
+
+    const openInstagram = () => {
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
+      if (!isMobile) {
+        window.open(WEB, "_blank", "noopener");
+        return;
+      }
+      // Mobil: önce Instagram kamerasını dene, açılmazsa hashtag sayfasına düş
+      const fallback = setTimeout(() => {
+        if (!document.hidden) window.location.href = WEB;
+      }, 1300);
+      const onHide = () => {
+        if (document.hidden) {
+          clearTimeout(fallback);
+          document.removeEventListener("visibilitychange", onHide);
+        }
+      };
+      document.addEventListener("visibilitychange", onHide);
+      window.location.href = "instagram://camera";
+    };
+
+    hashtagBtn.addEventListener("click", () => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(TAG).catch(() => {});
+      }
+      showToast("Hashtag kopyalandı · Instagram açılıyor");
+      openInstagram();
+    });
+  }
 });
