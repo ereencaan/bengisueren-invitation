@@ -848,28 +848,13 @@ body.intro-active { overflow: hidden; }
   pointer-events: none;
   animation: introPulse 1.9s ease-in-out infinite;
 }
-.intro-play {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: rgba(253, 251, 245, .88);
-  color: var(--green-deep);
-  border: 1px solid rgba(163, 146, 108, .5);
-  box-shadow: 0 12px 32px rgba(60, 50, 20, .28);
-}
-.intro-play svg { width: 26px; height: 26px; margin-left: 3px; }
 .intro-hint-text {
-  font-family: "Montserrat", sans-serif;
-  font-size: 11px;
-  letter-spacing: .26em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #6b5f44;
-  background: rgba(253, 251, 245, .72);
-  padding: 6px 14px;
-  border-radius: 999px;
+  font-family: "Pinyon Script", cursive;
+  font-size: clamp(26px, 7.5vw, 34px);
+  font-weight: 400;
+  letter-spacing: .01em;
+  color: var(--green-deep);
+  text-shadow: 0 1px 8px rgba(253, 251, 245, .85), 0 1px 2px rgba(110, 92, 55, .22);
 }
 .intro-overlay.playing .intro-hint { display: none; }
 @keyframes introPulse {
