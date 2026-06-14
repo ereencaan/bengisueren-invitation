@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
       aria_call_e: "Eren'i ara", aria_wa_e: "Eren'e WhatsApp",
       aria_share: "Instagram'da paylaş: #BengisuErenWedding",
       toast_copied: "Hashtag kopyalandı · Instagram açılıyor",
+      tap_start: "Başlamak için dokun",
+      skip: "Geç",
     },
     en: {
       married: "Getting Married",
@@ -52,6 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
       aria_call_e: "Call Eren", aria_wa_e: "WhatsApp Eren",
       aria_share: "Share on Instagram: #BengisuErenWedding",
       toast_copied: "Hashtag copied · Opening Instagram",
+      tap_start: "Tap to start",
+      skip: "Skip",
     },
   };
   const META = {
@@ -91,6 +95,50 @@ document.addEventListener("DOMContentLoaded", function () {
   let savedLang = "tr";
   try { savedLang = localStorage.getItem("lang") || "tr"; } catch (e) {}
   setLang(savedLang);
+
+  /* ---------- Açılış videosu (intro) ---------- */
+  const introOverlay = document.getElementById("introOverlay");
+  if (introOverlay) {
+    const introVideo = document.getElementById("introVideo");
+    const introSkip = document.getElementById("introSkip");
+    let started = false;
+    let ended = false;
+
+    document.body.classList.add("intro-active");
+
+    const endIntro = () => {
+      if (ended) return;
+      ended = true;
+      introOverlay.classList.add("hide");
+      document.body.classList.remove("intro-active");
+      setTimeout(() => {
+        if (introOverlay.parentNode) introOverlay.parentNode.removeChild(introOverlay);
+      }, 850);
+    };
+
+    const startVideo = () => {
+      if (started || ended) return;
+      started = true;
+      introOverlay.classList.add("playing");
+      if (introSkip) introSkip.hidden = false;
+      if (introVideo) {
+        const p = introVideo.play();
+        if (p && typeof p.catch === "function") p.catch(() => {});
+      } else {
+        endIntro();
+      }
+    };
+
+    if (introVideo) {
+      introVideo.addEventListener("ended", endIntro);
+      introVideo.addEventListener("error", endIntro);
+    }
+    introOverlay.addEventListener("click", (e) => {
+      if (e.target === introSkip) return;
+      startVideo();
+    });
+    if (introSkip) introSkip.addEventListener("click", endIntro);
+  }
 
   /* ---------- Scroll reveal ---------- */
   const revealEls = document.querySelectorAll(".reveal");

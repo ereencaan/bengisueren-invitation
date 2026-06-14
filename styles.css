@@ -811,3 +811,88 @@ body {
 @media (max-width: 720px) {
   .lang-switch { top: 10px; right: 10px; }
 }
+
+/* ============ AÇILIŞ VİDEOSU (intro) ============ */
+body.intro-active { overflow: hidden; }
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 32%, #f6f1e6, #e7dfce 78%);
+  transition: opacity .8s ease;
+}
+.intro-overlay.hide { opacity: 0; pointer-events: none; }
+.intro-video {
+  height: 100%;
+  width: 100%;
+  max-width: 480px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: #efe8d9;
+}
+.intro-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 13%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  pointer-events: none;
+  animation: introPulse 1.9s ease-in-out infinite;
+}
+.intro-play {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(253, 251, 245, .88);
+  color: var(--green-deep);
+  border: 1px solid rgba(163, 146, 108, .5);
+  box-shadow: 0 12px 32px rgba(60, 50, 20, .28);
+}
+.intro-play svg { width: 26px; height: 26px; margin-left: 3px; }
+.intro-hint-text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #6b5f44;
+  background: rgba(253, 251, 245, .72);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+.intro-overlay.playing .intro-hint { display: none; }
+@keyframes introPulse {
+  0%, 100% { transform: translateY(0); opacity: .9; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+.intro-skip {
+  position: fixed;
+  bottom: 18px;
+  right: 16px;
+  z-index: 3;
+  cursor: pointer;
+  background: rgba(253, 251, 245, .82);
+  border: 1px solid rgba(163, 146, 108, .5);
+  color: #6b5f44;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  padding: 7px 16px;
+  border-radius: 999px;
+}
+.intro-skip:hover { background: #fff; }
+@media (prefers-reduced-motion: reduce) {
+  .intro-hint { animation: none; }
+}
