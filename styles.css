@@ -833,7 +833,9 @@ body.intro-active { overflow: hidden; }
   object-fit: cover;
   object-position: center;
   display: block;
-  background: #efe8d9;
+  /* Poster'ı arka plana da koy: poster->video geçişindeki anlık boşlukta
+     (blink) aynı kare görünsün, kesintisiz olsun */
+  background: #efe8d9 url("intro-poster.jpg") center center / cover no-repeat;
 }
 .intro-hint {
   position: absolute;
