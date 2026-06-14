@@ -103,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const introSkip = document.getElementById("introSkip");
     let started = false;
     let ended = false;
-    let videoBroken = false;
 
     document.body.classList.add("intro-active");
 
@@ -117,28 +116,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 850);
     };
 
-    // Video oynatılamazsa intro KENDİLİĞİNDEN kapanmasın; sadece çıkış (Geç) görünsün
-    const markBroken = () => {
-      videoBroken = true;
-      if (introSkip) introSkip.hidden = false;
-    };
-
     const startVideo = () => {
       if (started || ended) return;
       started = true;
       introOverlay.classList.add("playing");
-      if (introSkip) introSkip.hidden = false;
+      if (introSkip) introSkip.hidden = false; // oynamazsa kullanıcı "Geç" ile çıkabilsin
       const p = introVideo && introVideo.play();
-      if (p && typeof p.catch === "function") p.catch(markBroken);
+      if (p && typeof p.catch === "function") p.catch(() => {});
     };
 
-    if (introVideo) {
-      introVideo.addEventListener("ended", endIntro);
-      introVideo.addEventListener("error", markBroken);
-    }
+    // Dokununca HER ZAMAN oynatmayı dene; video kendiliğinden geçmesin.
+    if (introVideo) introVideo.addEventListener("ended", endIntro);
     introOverlay.addEventListener("click", (e) => {
       if (e.target === introSkip) return;
-      if (!introVideo || videoBroken) { endIntro(); return; }
       startVideo();
     });
     if (introSkip) introSkip.addEventListener("click", endIntro);
