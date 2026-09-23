@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
       fam_bride: "GELİN AİLESİ",
       fam_groom: "DAMAT AİLESİ",
       dow: "CUMARTESİ",
-      month: "EYLÜL",
+      month: "EKİM",
       year_words: "İKİ BİN YİRMİ ALTI",
       cd_days: "GÜN", cd_hours: "SAAT", cd_min: "DAKİKA", cd_sec: "SANİYE",
       cal_text: "Bu özel günü takviminize ekleyin",
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
       fam_bride: "THE BRIDE'S FAMILY",
       fam_groom: "THE GROOM'S FAMILY",
       dow: "SATURDAY",
-      month: "SEPTEMBER",
+      month: "OCTOBER",
       year_words: "TWO THOUSAND TWENTY-SIX",
       cd_days: "DAYS", cd_hours: "HOURS", cd_min: "MINUTES", cd_sec: "SECONDS",
       cal_text: "Add this special day to your calendar",
@@ -59,8 +59,8 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   };
   const META = {
-    tr: { title: "Bengisu & Eren · Düğün Davetiyesi", desc: "Bengisu & Eren'in düğün davetiyesi — 5 Eylül 2026, Denizli." },
-    en: { title: "Bengisu & Eren · Wedding Invitation", desc: "Bengisu & Eren's wedding invitation — 5 September 2026, Denizli." },
+    tr: { title: "Bengisu & Eren · Düğün Davetiyesi", desc: "Bengisu & Eren'in düğün davetiyesi — 24 Ekim 2026, Denizli." },
+    en: { title: "Bengisu & Eren · Wedding Invitation", desc: "Bengisu & Eren's wedding invitation — 24 October 2026, Denizli." },
   };
 
   let currentLang = "tr";
@@ -95,6 +95,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let savedLang = "tr";
   try { savedLang = localStorage.getItem("lang") || "tr"; } catch (e) {}
   setLang(savedLang);
+
+  /* ---------- Yemekli / yemeksiz davet ---------- */
+  // Varsayılan yemeksiz; yemekli davetlilere linkin sonuna ?yemekli eklenir.
+  const isDinnerGuest = /(^|[?&#])yemekli(|=|&|$)/i.test(location.search + location.hash);
+  const scheduleGrid = document.getElementById("scheduleGrid");
+  if (isDinnerGuest && scheduleGrid) scheduleGrid.classList.remove("no-dinner");
 
   /* ---------- Açılış videosu (intro) ---------- */
   const introOverlay = document.getElementById("introOverlay");
@@ -152,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
   revealEls.forEach((el) => observer.observe(el));
 
   /* ---------- Countdown ---------- */
-  const target = new Date("2026-09-05T18:00:00+03:00").getTime();
+  const target = new Date("2026-10-24T18:00:00+03:00").getTime();
   const cd = document.getElementById("countdown");
 
   if (cd) {
@@ -209,8 +215,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function downloadIcs() {
-    const start = new Date("2026-09-05T18:00:00+03:00");
-    const end = new Date("2026-09-05T23:00:00+03:00");
+    const start = new Date("2026-10-24T18:00:00+03:00");
+    const end = new Date("2026-10-24T23:00:00+03:00");
     const ics = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
@@ -218,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "CALSCALE:GREGORIAN",
       "METHOD:PUBLISH",
       "BEGIN:VEVENT",
-      "UID:bengisu-eren-2026-09-05@wedding",
+      "UID:bengisu-eren-2026-10-24@wedding",
       "DTSTAMP:" + icsDate(new Date("2026-01-01T00:00:00Z")),
       "DTSTART:" + icsDate(start),
       "DTEND:" + icsDate(end),

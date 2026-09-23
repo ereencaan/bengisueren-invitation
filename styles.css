@@ -403,6 +403,8 @@ body {
   border-right: 1px solid rgba(107, 122, 90, .3);
 }
 .schedule-item:last-child { border-right: none; }
+.schedule-grid.no-dinner { grid-template-columns: repeat(2, 1fr); max-width: 420px; }
+.schedule-grid.no-dinner [data-dinner] { display: none; }
 .schedule-item svg {
   width: 58px;
   height: 58px;
