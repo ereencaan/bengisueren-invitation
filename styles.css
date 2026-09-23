@@ -514,6 +514,65 @@ body {
   stroke-linecap: round;
 }
 
+/* ============ ANILAR ============ */
+.memories {
+  background:
+    linear-gradient(180deg, transparent, rgba(232, 235, 219, .55) 45%, transparent);
+  padding-top: 46px;
+  padding-bottom: 58px;
+}
+.mem-ico {
+  display: block;
+  width: 58px;
+  height: 58px;
+  margin: 30px auto 16px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mem-ico .mem-heart { fill: rgba(179, 160, 121, .28); }
+.mem-text {
+  max-width: 520px;
+  margin: 0 auto 30px;
+  color: var(--muted);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(21px, 3.4vw, 27px);
+  font-style: italic;
+  line-height: 1.34;
+}
+.mem-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 30px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--green-deep);
+  text-decoration: none;
+  letter-spacing: .2em;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 8px 22px rgba(179, 160, 121, .18);
+  transition: transform .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
+}
+.mem-btn svg { width: 17px; height: 17px; transition: transform .25s ease; }
+.mem-btn:hover {
+  transform: translateY(-2px);
+  background: var(--gold);
+  color: white;
+  box-shadow: 0 12px 28px rgba(179, 160, 121, .32);
+}
+.mem-btn:hover svg { transform: translateX(3px); }
+.mem-url {
+  margin: 14px 0 0;
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: var(--gold);
+}
+
 /* ============ RSVP ============ */
 .rsvp {
   background:
