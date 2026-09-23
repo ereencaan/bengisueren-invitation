@@ -97,8 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
   setLang(savedLang);
 
   /* ---------- Yemekli / yemeksiz davet ---------- */
-  // Varsayılan yemeksiz; yemekli davetlilere linkin sonuna ?yemekli eklenir.
-  const isDinnerGuest = /(^|[?&#])yemekli(|=|&|$)/i.test(location.search + location.hash);
+  // Varsayılan yemeksiz; yemekli davetlilere linkin sonuna ?y eklenir.
+  const isDinnerGuest = /(^|[?&#])(y|yemekli)(=|&|$)/i.test(location.search + location.hash);
   const scheduleGrid = document.getElementById("scheduleGrid");
   if (isDinnerGuest && scheduleGrid) scheduleGrid.classList.remove("no-dinner");
 
