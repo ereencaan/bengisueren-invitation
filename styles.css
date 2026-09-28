@@ -766,6 +766,124 @@ body {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
+/* ============ ANİMASYONLAR ============ */
+/* Sarmaşık (JS ile çizilir, kaydırdıkça büyür) */
+.vines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  pointer-events: none;
+  overflow: visible;
+}
+.vine-stem {
+  fill: none;
+  stroke: rgba(111, 124, 91, .55);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.vine-leaf {
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity .6s ease, transform .9s cubic-bezier(.2, .8, .25, 1.15);
+}
+.vine-leaf.on { opacity: 1; transform: scale(1); }
+.vine-leaf path {
+  fill: rgba(154, 166, 128, .38);
+  stroke: rgba(111, 124, 91, .6);
+  stroke-width: .9;
+  stroke-linejoin: round;
+}
+.vine-leaf .vine-rib { fill: none; stroke: rgba(111, 124, 91, .45); stroke-width: .6; }
+.vine-flower {
+  opacity: 0;
+  transform: scale(0) rotate(-60deg);
+  transition: opacity .7s ease .15s, transform 1.1s cubic-bezier(.2, .8, .25, 1.2) .15s;
+}
+.vine-flower.on { opacity: 1; transform: scale(1) rotate(0); }
+.vine-flower circle { fill: rgba(214, 203, 171, .9); stroke: rgba(179, 160, 121, .7); stroke-width: .5; }
+.vine-flower .vine-flower-c { fill: var(--gold); stroke: none; }
+
+/* Kuşlar (davetiye açılınca bir kez) */
+.birds {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.bird {
+  position: absolute;
+  left: -60px;
+  width: 34px;
+  opacity: 0;
+  animation-name: birdFly;
+  animation-timing-function: cubic-bezier(.35, .1, .55, .95);
+  animation-fill-mode: both;
+}
+.bird-bob { animation: birdBob 2.6s ease-in-out infinite; }
+.bird svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  transform: scale(var(--s));
+  filter: drop-shadow(0 1px 3px rgba(34, 38, 28, .35));
+}
+.bird .wing {
+  fill: none;
+  stroke: #fdfbf4;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  animation: var(--flap) ease-in-out infinite alternate;
+}
+.bird .wing { transform-box: fill-box; }
+.bird .wl { animation-name: flapL; transform-origin: 100% 100%; }
+.bird .wr { animation-name: flapR; transform-origin: 0 100%; }
+@keyframes flapL { from { transform: rotate(14deg); } to { transform: rotate(-30deg); } }
+@keyframes flapR { from { transform: rotate(-14deg); } to { transform: rotate(30deg); } }
+@keyframes birdBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+@keyframes birdFly {
+  0% { opacity: 0; transform: translate(0, 30px); }
+  10% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dist), -70px); }
+}
+
+/* Çizilen ikonlar (uzunlukları JS ayarlar) */
+.draw-ico * { transition: stroke-dashoffset 1.8s cubic-bezier(.45, .1, .3, 1) .35s, fill .6s ease 1.6s; }
+.reveal.visible .draw-ico * { stroke-dashoffset: 0 !important; }
+.mem-ico.draw-ico .mem-heart { fill: transparent; }
+.reveal.visible .mem-ico.draw-ico .mem-heart { fill: rgba(179, 160, 121, .28); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Süsler: ❦ dönerek belirir, çizgiler ortadan dışa uzar */
+  .reveal .ornament span { transform: scaleX(0); transition: transform 1.2s cubic-bezier(.2, .7, .2, 1) .45s; }
+  .reveal .ornament span:first-child { transform-origin: right center; }
+  .reveal .ornament span:last-child { transform-origin: left center; }
+  .reveal.visible .ornament span { transform: scaleX(1); }
+  .reveal .ornament b {
+    display: inline-block;
+    opacity: 0;
+    transform: rotate(-120deg) scale(.5);
+    transition: opacity .8s ease .3s, transform 1.1s cubic-bezier(.2, .8, .25, 1.15) .3s;
+  }
+  .reveal.visible .ornament b { opacity: 1; transform: none; }
+
+  /* Tarih: 24 soldan, 26 sağdan gelir; ay ve saat ortada belirir */
+  .date-section .d-num { transition: opacity 1s ease .35s, transform 1.2s cubic-bezier(.2, .7, .2, 1) .35s; opacity: 0; }
+  .date-section .d-num:first-child { transform: translateX(-34px); }
+  .date-section .d-num:last-child { transform: translateX(34px); }
+  .date-section .d-mid { opacity: 0; transform: scale(.9); transition: opacity 1s ease .7s, transform 1.1s ease .7s; }
+  .date-section .d-line { transform: scaleX(0); transition: transform 1s ease 1s; }
+  .date-section.visible .d-num,
+  .date-section.visible .d-mid { opacity: 1; transform: none; }
+  .date-section.visible .d-line { transform: scaleX(1); }
+}
+
 /* ============ RESPONSIVE ============ */
 @media (max-width: 720px) {
   .invite { max-width: 100%; margin: 0; box-shadow: none; }
