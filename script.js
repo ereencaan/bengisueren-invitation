@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
       cal_text: "Bu özel günü takviminize ekleyin",
       cal_google: "Google Takvim", cal_apple: "Apple Takvim", cal_outlook: "Outlook / .ics",
       sched_eyebrow: "GECE PLANI",
-      sched_ceremony: "NİKAH", sched_dinner: "YEMEK", sched_party: "EĞLENCE",
+      sched_ceremony: "NİKAH", sched_dinner: "YEMEK", sched_party: "EĞLENCE", sched_wedding: "DÜĞÜN",
       venue_eyebrow: "DÜĞÜN YERİ",
       directions: "YOL TARİFİ",
       rsvp_eyebrow: "LÜTFEN BİLDİRİN",
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
       cal_text: "Add this special day to your calendar",
       cal_google: "Google Calendar", cal_apple: "Apple Calendar", cal_outlook: "Outlook / .ics",
       sched_eyebrow: "THE EVENING",
-      sched_ceremony: "CEREMONY", sched_dinner: "DINNER", sched_party: "CELEBRATION",
+      sched_ceremony: "CEREMONY", sched_dinner: "DINNER", sched_party: "CELEBRATION", sched_wedding: "WEDDING CELEBRATION",
       venue_eyebrow: "VENUE",
       directions: "DIRECTIONS",
       rsvp_eyebrow: "KINDLY RSVP",
@@ -98,15 +98,25 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".lang-btn").forEach((b) => {
     b.addEventListener("click", () => setLang(b.getAttribute("data-lang")));
   });
+  /* ---------- Yemekli / yemeksiz davet ---------- */
+  // Varsayılan yemeksiz: sadece 20:00 düğün. Yemekli davetlilere linkin sonuna ?y eklenir:
+  // nikah 18:00 + yemek 18:30 + eğlence 20:00.
+  const isDinnerGuest = /(^|[?&#])(y|yemekli)(=|&|$)/i.test(location.search + location.hash);
+  const START_HOUR = isDinnerGuest ? "18:00" : "20:00";
+  if (isDinnerGuest) {
+    const scheduleGrid = document.getElementById("scheduleGrid");
+    const partyLabel = document.getElementById("partyLabel");
+    const dTime = document.getElementById("dTime");
+    const calGoogle = document.getElementById("calGoogle");
+    if (scheduleGrid) scheduleGrid.classList.remove("no-dinner");
+    if (partyLabel) partyLabel.setAttribute("data-i18n", "sched_party");
+    if (dTime) dTime.textContent = START_HOUR;
+    if (calGoogle) calGoogle.href = calGoogle.href.replace("20261024T170000Z/", "20261024T150000Z/");
+  }
+
   let savedLang = "tr";
   try { savedLang = localStorage.getItem("lang") || "tr"; } catch (e) {}
   setLang(savedLang);
-
-  /* ---------- Yemekli / yemeksiz davet ---------- */
-  // Varsayılan yemeksiz; yemekli davetlilere linkin sonuna ?y eklenir.
-  const isDinnerGuest = /(^|[?&#])(y|yemekli)(=|&|$)/i.test(location.search + location.hash);
-  const scheduleGrid = document.getElementById("scheduleGrid");
-  if (isDinnerGuest && scheduleGrid) scheduleGrid.classList.remove("no-dinner");
 
   /* ---------- Açılış videosu (intro) ---------- */
   const introOverlay = document.getElementById("introOverlay");
@@ -164,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
   revealEls.forEach((el) => observer.observe(el));
 
   /* ---------- Countdown ---------- */
-  const target = new Date("2026-10-24T18:00:00+03:00").getTime();
+  const target = new Date("2026-10-24T" + START_HOUR + ":00+03:00").getTime();
   const cd = document.getElementById("countdown");
 
   if (cd) {
@@ -221,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function downloadIcs() {
-    const start = new Date("2026-10-24T18:00:00+03:00");
+    const start = new Date("2026-10-24T" + START_HOUR + ":00+03:00");
     const end = new Date("2026-10-24T23:00:00+03:00");
     const ics = [
       "BEGIN:VCALENDAR",
